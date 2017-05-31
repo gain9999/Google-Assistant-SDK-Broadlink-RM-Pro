@@ -9,3 +9,10 @@ Python control for Broadlink RM2 IR controllers
 https://github.com/mjg59/python-broadlink
 
 
+<h3>To make Google Assistant run on startup:</h3>
+```
+sudo chmod +x launch-assistant.sh
+sudo nano /etc/rc.local
+Add /home/pi/launch-assistant.sh
+```
+
