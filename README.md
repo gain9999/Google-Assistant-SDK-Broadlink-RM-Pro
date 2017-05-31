@@ -21,6 +21,6 @@ Add /home/pi/launch-assistant.sh
 2. run ir.py
 3. enter button name
 
-Since Google Assistant run on Python 3 and Broadlink API run on Python 2 I wrote autocheck_ir_command.py to check the IR command from text file every 1 second. The IR command is created by Google Asssitant in __main__.py There might be a better way around to do this though.
+Since Google Assistant run on Python 3 but Broadlink API run on Python 2, I cannot establish a connection with Broadlink device by Google Asssitant SDK during start so I have to wrote autocheck_ir_command.py to check the IR command from text file every 1 second in background. The IR command is created by Google Asssitant in __main__.py There might be a better way around to do this though.
 
 Location of __main__.py: /home/pi/env/local/lib/python2.7/site-packages/google/assistant/
