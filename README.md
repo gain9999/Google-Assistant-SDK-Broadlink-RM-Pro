@@ -17,3 +17,8 @@ Add /home/pi/launch-assistant.sh
 ```
 
 Location of __main__.py: /home/pi/env/local/lib/python2.7/site-packages/google/assistant/
+
+#### How to learn IR code for each button
+1. create folder ir_codes in /home/pi
+2. run ir.py
+3. enter button name
