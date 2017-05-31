@@ -51,60 +51,60 @@ def process_event(event):
 
 	if event.type == EventType.ON_RECOGNIZING_SPEECH_FINISHED:
 		#print(event.args["text"])
-		event.args["text"] = event.args["text"].lower()
-		event.args["text"] = event.args["text"].replace("two","2")
-		event.args["text"] = event.args["text"].replace("ten","10")
-		if "channel" in event.args["text"]:
-			if hasNumbers(event.args["text"]):
-				no = re.findall('\d+', event.args["text"])[0]
+		text = event.args["text"].lower()
+		text = text.replace("two","2")
+		text = text.replace("ten","10")
+		if "channel" in text:
+			if hasNumbers(text):
+				no = re.findall('\d+', text)[0]
 				print("Go to channel "+no)
 				sendIR(no)
 				return 1
-			elif "up" in event.args["text"]:
+			elif "up" in text:
 				sendIR("TOT_channelup")
 				return 1
-			elif "down" in event.args["text"]:
+			elif "down" in text:
 				sendIR("TOT_channeldown")
 				return 1
-		elif "volume" in event.args["text"] and "up" in event.args["text"]:
-			if hasNumbers(event.args["text"]):
-				n = re.findall('\d+', event.args["text"])[0]
+		elif "volume" in text and "up" in text:
+			if hasNumbers(text):
+				n = re.findall('\d+', text)[0]
 				t = threading.Thread(target = sendRepeatIR, args = ("TOT_volumeup", n))
 				t.start()
 			else:		
 				sendIR("TOT_volumeup")
 			return 1
-		elif "volume" in event.args["text"] and "down" in event.args["text"]:
-			if hasNumbers(event.args["text"]):
-				n = re.findall('\d+', event.args["text"])[0]
+		elif "volume" in text and "down" in text:
+			if hasNumbers(text):
+				n = re.findall('\d+', text)[0]
 				t = threading.Thread(target = sendRepeatIR, args = ("TOT_volumedown", n))
 				t.start()
 			else:		
 				sendIR("TOT_volumedown")
 			return 1
-		elif "back" in event.args["text"]:
-			if hasNumbers(event.args["text"]):
-				n = re.findall('\d+', event.args["text"])[0]
+		elif "back" in text:
+			if hasNumbers(text):
+				n = re.findall('\d+', text)[0]
 				t = threading.Thread(target = sendRepeatIR, args = ("TOT_left", n))
 				t.start()
 			else:		
 				sendIR("TOT_left")
 			return 1
-		elif "forward" in event.args["text"]:
-			if hasNumbers(event.args["text"]):
-				n = re.findall('\d+', event.args["text"])[0]
+		elif "forward" in text:
+			if hasNumbers(text):
+				n = re.findall('\d+', text)[0]
 				t = threading.Thread(target = sendRepeatIR, args = ("TOT_right", n))
 				t.start()
 			else:		
 				sendIR("TOT_right")
 			return 1						
-		elif "tv" in event.args["text"]:
-			if "on" in event.args["text"] or "off" in event.args["text"]:
+		elif "tv" in text:
+			if "on" in text or "off" in text:
 				t = threading.Thread(target = sendMultiIR, args = (["TOT_power","TV_power"]))
 				t.start()
 				return 1
-		elif "hdmi" in event.args["text"] and hasNumbers(event.args["text"]):
-			n = int(re.findall('\d+', event.args["text"])[0])
+		elif "hdmi" in text and hasNumbers(text):
+			n = int(re.findall('\d+', text)[0])
 			if n == 3:
 				t = threading.Thread(target = sendMultiIR, args = (["TOT_power","TV_input","TV_right","TV_right","TV_ok"],))
 				t.start()
@@ -112,25 +112,25 @@ def process_event(event):
 				t = threading.Thread(target = sendMultiIR, args = (["TOT_power","TV_input","TV_left","TV_left","TV_ok"],))
 				t.start()
 			return 1				
-		elif "ac" in event.args["text"]:
-			if "on" in event.args["text"]:
+		elif "ac" in text:
+			if "on" in text:
 				sendIR("AC_on")
 				return 1				
-			elif "off" in event.args["text"]:
+			elif "off" in text:
 				sendIR("AC_off")
 				return 1
-			elif "up" in event.args["text"]:
+			elif "up" in text:
 				sendIR("AC_up")
 				return 1
-			elif "down" in event.args["text"]:
+			elif "down" in text:
 				sendIR("AC_down")
 				return 1
-		elif "shut down" in event.args["text"]:
+		elif "shut down" in text:
 			print("shutdown now")
 			subprocess.call(['aplay -fdat /home/pi/shutdown.wav'], shell=True)
 			os.system("sudo shutdown -h now")
 			return 1
-		elif "restart" in event.args["text"]:
+		elif "restart" in text:
 			print("restart now")
 			subprocess.call(['aplay -fdat /home/pi/shutdown.wav'], shell=True)
 			os.system("sudo reboot")
