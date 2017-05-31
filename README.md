@@ -16,3 +16,4 @@ sudo nano /etc/rc.local
 Add /home/pi/launch-assistant.sh
 ```
 
+Upload __main__.py to /home/pi/env/local/lib/python2.7/site-packages/google/assistant/
