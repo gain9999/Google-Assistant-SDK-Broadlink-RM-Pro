@@ -13,7 +13,7 @@ https://github.com/mjg59/python-broadlink
 ```
 sudo chmod +x launch-assistant.sh
 sudo nano /etc/rc.local
-Add /home/pi/launch-assistant.sh
+Add python /home/pi/googleassistant.py
 ```
 
 #### To learn and save IR code for each button
